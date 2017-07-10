@@ -1,28 +1,18 @@
 const express = require('express');
 const app = express();
-const togeojson = require ('togeojson');
-const fs = require ('fs');
-const jsdom = require('jsdom').jsdom;
-const multer  = require('multer')
-const upload = multer({ dest: 'uploads/' })
+const mongoose = require('mongoose');
 
-app.post('/routes/upload', upload.single('file'), (req, res) => {
-    let file = req.file;
-    if (file){
-        console.log("Uploaded " + file.originalname + " to " + file.path);
+mongoose.Promise = global.Promise;
 
-        fs.readFile(file.path, (err, data) =>{
-            let gpx = jsdom(data);
-            let converted = togeojson.gpx(gpx);
+mongoose.connect('mongodb://localhost/geoData')
+    .then(() => console.log("Connected to Database successfully!"))
+    .catch(err => console.error(err));
 
-            res.send(converted);
-        })
-    }
-    else{
-        console.log("No File");
-        res.sendStatus(500);
-    }
-})
+require('./geoData.model.js');
+
+const GeoDataRouter = require('./geoData.route.js');
+
+app.use('/routes', GeoDataRouter);
 
 app.listen(3000, function () {
   console.log('App listening on port 3000!')
