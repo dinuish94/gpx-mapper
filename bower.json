@@ -1,0 +1,24 @@
+{
+  "name": "geo-app-test",
+  "description": "",
+  "main": "server.js",
+  "authors": [
+    "AhamedKashif <ahamed.a@findmyfare.lk>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/dinuish94/gpx-mapper",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.6.5",
+    "angular-route": "^1.6.5",
+    "angular-google-maps": "^2.4.1",
+    "lodash": "^4.17.4"
+  }
+}
