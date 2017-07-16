@@ -38,7 +38,7 @@ Router.post('/upload', upload.single('file'), (req, res) => {
 
 Router.get('/', (req,res) => {
     GeoDataModel.find().then( data => {
-        res.send(data);
+        res.send(data[0]['features'][0]['geometry']['coordinates']);
     })
 })
 
